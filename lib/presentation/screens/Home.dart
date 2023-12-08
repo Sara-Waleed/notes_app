@@ -1,23 +1,37 @@
 import 'package:flutter/material.dart';
 
+import '../../domain/shared_components/BottomSheet.dart';
+import '../../domain/shared_components/Note_Card.dart';
+import '../../domain/shared_components/custom_AppBar.dart';
+
 class Home extends StatelessWidget {
    Home({Key? key}) : super(key: key);
-String title="flutter tip";
-String desc="there is a new tip in flutter there is a new tip in flutter there is a new tip in flutter";
+String title="Flutter tip";
+String desc="There is a new tip in flutter there is a new tip in flutter there is a new tip in flutter";
 String time="May 2/2/2002";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0.0,
         title: Text(
-          "Notes"
+            "Notes"
         ),
         actions: [
-          Icon(Icons.search),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+                width: 40,
+                decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(Icons.search)),
+          ),
         ],
       ),
         body: ListView.builder(
-          
+
             itemBuilder: (context, index) {
               return  Note(title: title, desc: desc, time: time);
             },
@@ -25,70 +39,25 @@ String time="May 2/2/2002";
             itemCount: 10,
            ),
 
-    );
-  }
-}
-
-class Note extends StatelessWidget {
-  const Note({
-    super.key,
-    required this.title,
-    required this.desc,
-    required this.time,
-  });
-
-  final String title;
-  final String desc;
-  final String time;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Container(
-            height: 200,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: Colors.yellow,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.grey,
+        onPressed: (){
+          showModalBottomSheet(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
             ),
-             child: Padding(
-               padding: const EdgeInsets.only(left:15.0,right: 15.0,top: 20,bottom: 10),
-               child: Column(
-                 children: [
-                   Row(
-                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                     children: [
-                       Text("$title",style: TextStyle(
-                           color: Colors.black,
-                           fontSize: 25,
-                           fontWeight: FontWeight.bold),),
-                       IconButton(onPressed: (){}, icon:  Icon(Icons.delete,size: 30,)),
+              context:context,
+              builder: (context) {
+                return BottonSheet();
+              },);
 
-                     ],
-                   ),
-                   SizedBox(height: 10,),
-                   Align(
-                       alignment: Alignment.centerLeft,
-                       child: Text("$desc",style: TextStyle(
-                           color: Colors.blueGrey,
-                           fontSize: 15,
-                           fontWeight: FontWeight.bold),)),
-                   SizedBox(height: 20,),
-                   Align(
-                       alignment: Alignment.bottomRight,
-                       child: Text("$time",style: TextStyle(
-                           color: Colors.black,
-                           fontSize: 15,
-                           fontWeight: FontWeight.bold),)),
-                 ],
-               ),
-             ),
-          ),
-        ],
+        },
+        child: Icon(Icons.add),
       ),
+
     );
   }
 }
+
+
+
