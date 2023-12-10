@@ -5,14 +5,25 @@ class BottomSheetTextField extends StatelessWidget {
   const BottomSheetTextField({
     super.key,
     required this.text,
-    required this.maxlin
+    required this.maxlin,
+    this.onsaved
   });
   final String text;
   final int maxlin;
+  final  Function(String?)? onsaved;
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      onSaved: onsaved,
       maxLines: maxlin,
+      validator: (value){
+        if(value?.isEmpty ?? true){
+          return "Field is required ";
+        }
+        else{
+          return null;
+        }
+      },
       decoration: InputDecoration(
         hintText: "$text",
         hintStyle: TextStyle(
