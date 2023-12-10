@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/domain/shared_components/custom_TextField.dart';
 
-import '../../domain/shared_components/BottomSheet.dart';
-
 class EditPage extends StatelessWidget {
   const EditPage({Key? key}) : super(key: key);
 

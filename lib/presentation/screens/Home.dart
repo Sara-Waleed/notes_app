@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../domain/shared_components/BottomSheet.dart';
 import '../../domain/shared_components/Note_Card.dart';
-import '../../domain/shared_components/custom_AppBar.dart';
-
 class Home extends StatelessWidget {
    Home({Key? key}) : super(key: key);
 String title="Flutter tip";
