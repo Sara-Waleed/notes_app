@@ -10,9 +10,10 @@ import 'presentation/screens/Edit_Note_Page.dart';
 import 'package:hive_flutter/adapters.dart';
 void main()async {
   await Hive.initFlutter();
-  Bloc.observer=SimpleBlocObserver();
+//  Bloc.observer=SimpleBlocObserver();
+  Hive.registerAdapter(NoteModelAdapter());
    await Hive.openBox<NoteModel>(kNoteBox);
-   Hive.registerAdapter(NoteModelAdapter());
+
   runApp(const MyApp());
 }
 
@@ -22,12 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // providing the cubit or bloc into all application to be visible :
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => AddNoteCubit(),),
-      ],
-
-      child: MaterialApp(
+    return  MaterialApp(
         routes: {
           "EditPage":(context) => EditPage(),
         },
@@ -35,7 +31,6 @@ class MyApp extends StatelessWidget {
    //   theme: ThemeData.light(),
         theme:ThemeData.dark(),
         home:Home(),
-      ),
     );
   }
 }
